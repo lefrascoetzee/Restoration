@@ -1,0 +1,5 @@
+<p *ngFor="let qDetail of quoteDetails | async">
+    {{qDetail.Stocknr}}: {{qDetail.Description}}<br>
+    {{qDetail.Quote.Comments}}<br>
+    {{qDetail.Quote.Price}}
+</p>

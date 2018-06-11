@@ -1,0 +1,3 @@
+<ol>
+  <li *ngFor="let q of listOfQuotes | async"><a routerLink="/quote/{{q.QuoteId}}" routerLinkActive="active">{{q.DateReceived.seconds * 1000 | date:'d MMM yyyy'}}</a></li>
+</ol>

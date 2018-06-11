@@ -1,0 +1,86 @@
+<p>{{itemUpdate | json}}</p>
+
+<form #itemForm="ngForm">
+   <!-- Start main item --> 
+  <mat-card *ngIf="showItem">
+    <mat-card-header>
+      <mat-card-title> <!-- Item title (Stock Number) --> 
+        <mat-form-field>
+          <input matInput placeholder="Stock Number:" [(ngModel)]="itemUpdate.Stocknr" name="Stocknr" id="Stocknr">
+        </mat-form-field>
+      </mat-card-title>
+      <mat-card-subtitle> <!-- Item subtitle (Item Description) -->
+        <mat-form-field>
+          <textarea matInput #descrip maxlength="256" matTextareaAutosize placeholder="Description:" [(ngModel)]="itemUpdate.Description"
+            name="Description" id="Description"></textarea>
+          <mat-hint align="end">{{descrip.value?.length || 0}}/256</mat-hint>
+        </mat-form-field>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content> <!-- Item content area containing nested cards for Quote and Invoice -->
+
+      <!-- Nested card for Quote -->
+      <mat-card *ngIf="itemUpdate.Quote">
+        <mat-card-header>
+          <mat-card-title>Quote Number: {{itemUpdate.Quote.QuoteId}}</mat-card-title> <!-- Quote Card Title (Quote Number) -->
+          <mat-card-subtitle>{{itemUpdate.Quote.LastUpdated.seconds * 1000 | date:'d MMM yyyy'}}</mat-card-subtitle> <!-- Quote Card Subtitle (Date Quote last updated) -->
+        </mat-card-header>
+        <mat-card-content> <!-- Quote content (Quote Comments and Price)-->
+          <!-- Quote Comments-->
+          <mat-form-field>
+            <textarea matInput matTextareaAutosize #quotecom maxlength="256" placeholder="Comments:" [(ngModel)]="itemUpdate.Quote.Comments" name="QuoteComments"
+              id="QuoteComments"></textarea>
+            <mat-hint align="end">{{quotecom.value?.length || 0}}/256</mat-hint>
+          </mat-form-field>
+          <br>
+          <!-- Quote Price-->
+          <mat-form-field>
+            <span matPrefix>£ &nbsp;</span>
+            <input matInput type="number" placeholder="Price:" [(ngModel)]="itemUpdate.Quote.Price" name="QuotePrice" id="QuotePrice">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+      <!-- Nested card for Quote End -->
+
+      <!-- Nested card for Invoice -->
+      <mat-card *ngIf="itemUpdate.Invoice">
+        <mat-card-header>
+          <mat-card-title>Invoice Number: {{itemUpdate.Invoice.InvoiceID}}</mat-card-title> <!-- Invoice Card Title (Invoice Number) -->
+          <mat-card-subtitle>{{itemUpdate.Invoice.LastUpdated.seconds * 1000 | date:'d MMM yyyy'}}</mat-card-subtitle> <!-- Invoice Card Subtitle (Date Invoice last updated) -->
+        </mat-card-header>
+        <mat-card-content> <!-- Invoice content (Invoice Comments and Price)-->
+          <!-- Invoice Comments-->
+          <mat-form-field>
+            <textarea matInput matTextareaAutosize #invcom maxlength="256" placeholder="Comments:" [(ngModel)]="itemUpdate.Invoice.Comments" name="InvoiceComments"
+              id="InvoiceComments"></textarea>
+            <mat-hint align="end">{{invcom.value?.length || 0}}/256</mat-hint>
+          </mat-form-field>
+          <br>
+          <!-- Invoice Price-->
+          <mat-form-field>
+            <span matPrefix>£ &nbsp;</span>
+            <input matInput type="number" placeholder="Price:" [(ngModel)]="itemUpdate.Invoice.Price" name="InvoicePrice" id="InvoicePrice">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+    <!-- Nested card for Invoice End -->
+
+    <!-- Item Card Action -->
+    <mat-card-actions>
+      <button *ngIf="itemUpdate.Stocknr" mat-button color="accent" (click)="updateItem()">Update</button>
+    </mat-card-actions>
+    <mat-card-actions>
+        <button *ngIf="itemUpdate.Stocknr" mat-button color="accent" (click)="clearItem()">Clear</button>
+    </mat-card-actions>
+    <mat-card-actions>
+        <button *ngIf="!itemUpdate.Quote" mat-button color="accent" (click)="addQuote()">Add Quote</button>
+    </mat-card-actions>
+    <mat-card-actions>
+        <button *ngIf="!itemUpdate.Invoice" mat-button color="accent" (click)="addInvoice()">Add Invoice</button>
+    </mat-card-actions>
+
+  </mat-card>
+  <!-- Item Card End -->
+</form>
+
