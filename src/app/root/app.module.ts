@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 /**
  * Restoration Services Imports
@@ -39,6 +40,7 @@ import {QuotedetailComponent} from '../quotedetail/quotedetail.component';
     BrowserModule,
     RouterRoutingModule,
     MyOwnCustomMaterialModule,
+    FlexLayoutModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

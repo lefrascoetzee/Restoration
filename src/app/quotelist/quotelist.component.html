@@ -1,3 +1,13 @@
-<ol>
-  <li *ngFor="let q of listOfQuotes | async"><a routerLink="/quote/{{q.QuoteId}}" routerLinkActive="active">{{q.DateReceived.seconds * 1000 | date:'d MMM yyyy'}}</a></li>
-</ol>
+<div fxLayout="row">
+  <div fxFlex="25%">
+    <ul>
+      <li *ngFor="let q of listOfQuotes | async" (click)='selectQuote(q.QuoteId)'>
+       {{q.DateReceived.seconds * 1000 | date:'d MMM yyyy'}}
+      </li>
+    </ul>
+  </div>
+  <div fxFlex>
+    <app-quotedetail #QuotedetailComponent></app-quotedetail>
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,8 @@ import {QuoteDataService} from '../data-services/quote-data.service';
 })
 export class QuotedetailComponent implements OnInit {
   public quoteDetails:Observable<ItemObject[]>;
+  public showQuoteDetails: boolean = false;
+
 
   constructor(
     private qds:QuoteDataService,
@@ -21,9 +23,17 @@ export class QuotedetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.quoteDetails = this.qds.getQuote(params['qid'])
+    this.route.params.subscribe(params => { 
+      if(params['qid'] != null){
+      this.getQouteDetails(params['qid']);
+      this.showQuoteDetails = true;
+    }
     });
+  }
+
+  getQouteDetails(qid:string){
+      this.quoteDetails = this.qds.getQuote(qid);
+      this.showQuoteDetails = true;
   }
 
 }
