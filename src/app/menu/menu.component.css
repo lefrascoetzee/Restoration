@@ -1,0 +1,10 @@
+.spacer{
+  flex: 1 1 auto
+}
+
+img {
+  border-radius: 50%;
+  max-width: 35px;
+  height: auto;
+  margin: 15px;
+}

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ItemObject } from '../objects/item.object';
 import {QuoteDataService} from '../data-services/quote-data.service';
+import { quoteObject } from '../objects/quote.object';
 
 @Component({
   selector: 'app-quotedetail',
@@ -13,6 +14,7 @@ import {QuoteDataService} from '../data-services/quote-data.service';
 })
 export class QuotedetailComponent implements OnInit {
   public quoteDetails:Observable<ItemObject[]>;
+  public quoteToDisplay:Observable<quoteObject>;
   public showQuoteDetails: boolean = false;
 
 
@@ -32,7 +34,8 @@ export class QuotedetailComponent implements OnInit {
   }
 
   getQouteDetails(qid:string){
-      this.quoteDetails = this.qds.getQuote(qid);
+      this.quoteDetails = this.qds.getQuoteItems(qid);
+      this.quoteToDisplay = this.qds.getQuote(qid);
       this.showQuoteDetails = true;
   }
 

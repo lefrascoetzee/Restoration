@@ -1,0 +1,25 @@
+
+<div *ngIf="userAuth | async; else showLogin">
+<input 
+  style="display: none" 
+  type="file" (change)="onFileChanged($event)" 
+  #fileInput>
+  <div *ngIf="!selectedFile"> 
+      <button (click)="fileInput.click()">Select File</button>
+  </div>
+
+<div *ngIf="selectedFile">
+  <p>File to upload: {{selectedFile.name}} <button (click)="fileInput.click()">Change File Selection</button></p>
+  <p>Caption: <input type="text"></p>
+  <button (click)="onUpload()">Upload!</button> <button (click)="canselUpload()">Cansel Upload</button>
+</div>
+
+<div *ngIf="showUploadProgress">
+<P>Upload Progress:</P>
+  <mat-progress-bar mode="determinate" value="{{uploadPercent | async}}"></mat-progress-bar><br>
+</div>
+</div>
+
+<ng-template #showLogin>
+  <button (click)="login()">Login with Google</button>
+</ng-template>

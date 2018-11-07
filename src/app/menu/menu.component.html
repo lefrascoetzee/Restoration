@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Keramos</span>
+    <span class="spacer"></span>
+    <!-- Menu with button start -->
+     <!-- Menu button with icon -->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <span>Menu</span>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!-- Drop down Menu -->
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['/itemlist']">
+          <mat-icon>view_list</mat-icon>
+          <span>Items</span>
+        </a>
+        <a mat-menu-item routerLink="" disabled>
+          <mat-icon>monetization_on</mat-icon>
+          <span>Invoices</span>
+        </a>
+        <a mat-menu-item routerLink="/quotelist">
+          <mat-icon>library_books</mat-icon>
+          <span>Quotes</span>
+        </a>
+      </mat-menu>
+     <!-- Menu with button end -->
+     <span *ngIf="user| async as uR; else loggedOut">
+        <img src={{uR.photoURL}} alt="" (click)="doLogout()">
+     </span>
+     <ng-template #loggedOut>
+        <button (click)="doLogin()" mat-mini-fab color="accent"
+         matBadge="value" matBadgePosition="postion"
+         matBadeColor="color">Login
+        </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

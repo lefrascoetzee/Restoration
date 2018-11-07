@@ -11,7 +11,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
-import {FlexLayoutModule} from "@angular/flex-layout";
 
 /**
  * Restoration Services Imports
@@ -19,6 +18,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {ItemDataService} from '../data-services/item-data.service';
 import {MyOwnCustomMaterialModule} from '../root/app.material.module';
 import {QuoteDataService} from '../data-services/quote-data.service';
+import {AuthService} from '../auth-service/auth.service'
 
 /**
  * Restoration Component Imports
@@ -28,20 +28,32 @@ import {ItemComponent} from'../item/item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {QuotelistComponent} from '../quotelist/quotelist.component';
 import {QuotedetailComponent} from '../quotedetail/quotedetail.component';
+import { HomeComponent } from '../home/home.component';
+import { ItemListComponent } from '../item-list/item-list.component';
+
+/**
+ * Restoration Module Imports
+ */
+import {ImgModule} from'../imgModule/imgModule';
+import { MenuComponent } from '../menu/menu.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
     QuotelistComponent,
-    QuotedetailComponent
+    QuotedetailComponent,
+    HomeComponent,
+    ItemListComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     RouterRoutingModule,
     MyOwnCustomMaterialModule,
-    FlexLayoutModule,
     FormsModule,
+    ImgModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
@@ -49,7 +61,8 @@ import {QuotedetailComponent} from '../quotedetail/quotedetail.component';
   ],
   providers: [
     ItemDataService,
-    QuoteDataService
+    QuoteDataService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

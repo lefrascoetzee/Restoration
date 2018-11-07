@@ -46,6 +46,10 @@ export class ItemComponent implements OnInit {
     this.itd.updateItem(this.itemUpdate);
   }
 
+  addItem(){
+    this.itd.addItem(this.itemUpdate);
+  }
+
   clearItem(){
     let tmpItem = new ItemObject();
     this.itemUpdate = tmpItem;

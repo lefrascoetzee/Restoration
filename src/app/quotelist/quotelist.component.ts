@@ -38,4 +38,9 @@ export class QuotelistComponent implements OnInit {
     this.Quotedetail.getQouteDetails(this.selectedQuote)
   }
 
+  public createNewQuote(dte: Date){
+    let d:Date = new Date(dte);
+    this.qds.addNewQuote(d);
+  }
+
 }

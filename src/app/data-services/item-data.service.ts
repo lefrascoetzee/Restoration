@@ -13,11 +13,23 @@ export class ItemDataService {
   constructor(private afs: AngularFirestore,) { }
 
   public getItem(stockNr: string):Observable<ItemObject>{
-    return this.afs.doc<ItemObject>('Items/' + stockNr).valueChanges();
+      return this.afs.doc<ItemObject>('Items/' + stockNr).valueChanges();
   }
 
   public updateItem(itm:ItemObject){
-      this.afs.doc('Items/' + itm.Stocknr).set(itm);
+    let itmTemp: ItemObject = itm;
+    itmTemp.DateLastUpdated = new Date();
+    if(itmTemp.hasOwnProperty('Invoice')){
+      itmTemp.Invoice.LastUpdated = new Date ();
+    }
+    if(itmTemp.hasOwnProperty('Quote')){
+      itmTemp.Quote.LastUpdated = new Date ();
+    }
+      this.afs.doc('Items/' + itm.Stocknr).set(JSON.parse(JSON.stringify(itmTemp)));
   }
+
+  public addItem(itm:ItemObject){
+    this.afs.doc('Items/' + itm.Stocknr).set(JSON.parse(JSON.stringify(itm)));
+}
 
 }

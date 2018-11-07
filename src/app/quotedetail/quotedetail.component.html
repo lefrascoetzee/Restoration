@@ -1,4 +1,44 @@
+
+
+
 <div *ngIf="showQuoteDetails">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div fxFlex="25%">
+                <h1>Quote</h1>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start none">
+            <div fxFlex="25%">
+                <p>
+                    <b>Keramos</b>
+                    <br> 2A The Green
+                    <br> Writtle
+                    <br> CM1 3DU
+                    <br>Phone: 07415 950 733
+                </p>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <div fxFlex="30%" fxLayoutAlign="start none">
+                <p>
+                    <b>To: Madelena Ltd</b>
+                    <br>PO Box 2185
+                    <br>Wickford
+                    <br>SS11 9AB
+                    <br>United Kingdom
+                </p>
+            </div>
+            <div fxFlex fxLayoutAlign="start none"> </div>
+            <div fxFlex="50%" fxLayoutAlign="start none" *ngIf="quoteToDisplay | async as qtDisp ">
+                <p>Quote for items received on:
+                <br>{{qtDisp.DateReceived.seconds * 1000 | date:'d MMMM yyyy'}}
+                <br>Quote Ref: {{qtDisp.QuoteId}}
+                </p>
+
+            </div>
+        </div>
+
+
     <p *ngFor="let qDetail of quoteDetails | async">
         {{qDetail.Stocknr}}: {{qDetail.Description}}
         <br> {{qDetail.Quote.Comments}}

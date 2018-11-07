@@ -63,12 +63,17 @@
           </mat-form-field>
         </mat-card-content>
       </mat-card>
-    </mat-card-content>
     <!-- Nested card for Invoice End -->
-
+   
+    </mat-card-content>
+   
+  
     <!-- Item Card Action -->
     <mat-card-actions>
       <button *ngIf="itemUpdate.Stocknr" mat-button color="accent" (click)="updateItem()">Update</button>
+    </mat-card-actions>
+    <mat-card-actions>
+      <button *ngIf="!itemUpdate.Stocknr" mat-button color="accent" (click)="addItem()">Add</button>
     </mat-card-actions>
     <mat-card-actions>
         <button *ngIf="itemUpdate.Stocknr" mat-button color="accent" (click)="clearItem()">Clear</button>
@@ -83,4 +88,8 @@
   </mat-card>
   <!-- Item Card End -->
 </form>
+
+<app-img-viewer photosToDisplay='restoration' [identifier]='itemUpdate.Stocknr'></app-img-viewer>
+
+<app-img-upload photosToDisplay='restoration' [identifier]='itemUpdate.Stocknr'></app-img-upload>
 

@@ -5,6 +5,13 @@
        {{q.DateReceived.seconds * 1000 | date:'d MMM yyyy'}}
       </li>
     </ul>
+    <p>Add Quote</p>
+    <mat-form-field>
+      <input matInput #dateReceived [matDatepicker]="picker" placeholder="Date Received">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+   <button mat-raised-button (click)='createNewQuote(dateReceived.value)'>Add New Quote</button>
   </div>
   <div fxFlex>
     <app-quotedetail #QuotedetailComponent></app-quotedetail>
