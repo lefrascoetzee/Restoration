@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AppModule } from '../root/app.module';
 import {AngularFirestore} from 'angularfire2/firestore';
-import {ItemObject} from '../objects/item.object';
-import { Observable } from 'rxjs';
-
+import {ItemObject, ItemPhotosObject} from '../objects/item.object';
+import { PhotoObject} from '../objects/photo.object'
+import { Observable, of, pipe, combineLatest } from 'rxjs';
+import { merge, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,14 @@ export class ItemDataService {
   public getItem(stockNr: string):Observable<ItemObject>{
       return this.afs.doc<ItemObject>('Items/' + stockNr).valueChanges();
   }
+
+  public getItemPhotos(stockNr: string):Observable<ItemPhotosObject[]>{
+     return this.afs.collection<ItemPhotosObject>('Items/' + stockNr + '/photo').valueChanges();
+  }
+
+  public getItemIcon(stockNr: string):Observable<ItemPhotosObject[]>{
+    return this.afs.collection<ItemPhotosObject>('Items/' + stockNr + '/photo', ref => ref.where('icon', '==', 'true').limit(1)).valueChanges();
+ }
 
   public updateItem(itm:ItemObject){
     let itmTemp: ItemObject = itm;

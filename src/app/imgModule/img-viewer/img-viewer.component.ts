@@ -22,6 +22,8 @@ export class ImgViewerComponent implements OnInit {
   @Output() photoCounter: EventEmitter<number> = new EventEmitter();
   public photoList: Observable<ImgListObject[]>;
   public photoSelected:ImgListObject = null;
+  public photoSelectedNextIndex:number = 0;
+  public photoSelectedBackIndex:number = 0;
 
 
 
@@ -39,8 +41,10 @@ export class ImgViewerComponent implements OnInit {
   }
 
 
-  setSelectedPhoto(slectedPhoto:ImgListObject){
+  setSelectedPhoto(slectedPhoto:ImgListObject, slectedPhotoIndex: number ){
     this.photoSelected = slectedPhoto;
+    this.photoSelectedNextIndex = slectedPhotoIndex + 1;
+    this.photoSelectedBackIndex = slectedPhotoIndex - 1;
   }
 
   closeSelectedPhoto(){

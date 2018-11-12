@@ -10,7 +10,7 @@ import {ItemDataService} from '../data-services/item-data.service';
 /**
  * Restoration Object import
  */
-import {ItemObject} from '../objects/item.object';
+import {ItemObject, ItemPhotosObject} from '../objects/item.object';
 import {quoteObject} from '../objects/quote.object';
 import {invoiceObject} from '../objects/invoice.object';
 
@@ -21,7 +21,8 @@ import {invoiceObject} from '../objects/invoice.object';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  public items:Observable<ItemObject> = null
+  public items:Observable<ItemObject>;
+  public itemPhotos: Observable<ItemPhotosObject[]>;
   public itemUpdate: ItemObject = new ItemObject();
   public showItem:boolean = false;
 
@@ -34,10 +35,11 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.itd.getItem(params['snr']).subscribe(res =>{
+      this.items = this.itd.getItem(params['snr'])
+      this.items.subscribe(res =>{
         this.itemUpdate = res;
-        this.showItem = true;
       });
+      this.itemPhotos = this.itd.getItemPhotos(params['snr']);
     });
 
   }

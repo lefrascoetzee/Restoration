@@ -1,24 +1,8 @@
-<mat-card *ngIf="items | async as itm">
-  <mat-card-header>
-    <!-- Item avatar logo icon -->
-    <img *ngFor="let iconPhoto of itemPhotos | async" mat-card-avatar class="example-header-image" src={{iconPhoto.url}} alt="Photo of a Shiba Inu">
-     <!-- Item title (Description) and sub-title(Stocknr) -->
-    <mat-card-title>{{itm.Description}}</mat-card-title>
-    <mat-card-subtitle>{{itm.Stocknr}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-      <app-img-viewer photosToDisplay='restoration' [identifier]='itemUpdate.Stocknr'></app-img-viewer>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>actionOne</button>
-    <button mat-button>actionTwo</button>
-    </mat-card-actions>
-</mat-card>
-
+<p>{{itemUpdate | json}}</p>
 
 <form #itemForm="ngForm">
    <!-- Start main item --> 
-  <mat-card *ngIf="items | async">
+  <mat-card *ngIf="showItem">
     <mat-card-header>
       <mat-card-title> <!-- Item title (Stock Number) --> 
         <mat-form-field>
@@ -108,4 +92,4 @@
 <app-img-viewer photosToDisplay='restoration' [identifier]='itemUpdate.Stocknr'></app-img-viewer>
 
 <app-img-upload photosToDisplay='restoration' [identifier]='itemUpdate.Stocknr'></app-img-upload>
-<p>{{itemUpdate | json}}</p>
+

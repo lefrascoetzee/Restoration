@@ -1,19 +1,22 @@
+<div *ngIf="photoList | async as pList">
 <mat-card *ngIf="photoSelected">
   <mat-card-header>
     <mat-card-subtitle>{{photoSelected.caption}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <img src="{{photoSelected.url}}" height="100%" width="100%">
+    <img src="{{photoSelected.url}}" height="300px">
   </mat-card-content>
   <mat-card-actions>
+      <button mat-button (click)="setSelectedPhoto(pList[photoSelectedBackIndex], photoSelectedBackIndex)">Back</button>
+      <button mat-button (click)="setSelectedPhoto(pList[photoSelectedNextIndex], photoSelectedNextIndex)">Next</button>
       <button mat-button (click)="closeSelectedPhoto()">Close</button>
     </mat-card-actions>
 </mat-card>
 
 
 <mat-grid-list cols="3" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let photo of photoList | async">
-    <mat-card (click)="setSelectedPhoto(photo)">
+  <mat-grid-tile *ngFor="let photo of pList; let photoidx = index">
+    <mat-card (click)="setSelectedPhoto(photo, photoidx)">
       <mat-card-header>
         <mat-card-subtitle>{{photo.caption}}</mat-card-subtitle>
       </mat-card-header>
@@ -25,9 +28,10 @@
           <img [src]="photo.url_thumb" height="100%" width="100%" crossorigin="anonymous">
         </ng-template>
         <ng-template #dispURL>
-          <img src="{{photo.url}}" height="200px" width="200px" >
+          <img src="{{photo.url}}" height="100px" width="100px" >
         </ng-template>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+</div>
